@@ -1,13 +1,24 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :users
-  map.resources :comments, :member => {:upvote => :post}
-  map.resources :stories,  :member => {:upvote => :post}
-  map.resource  :session
+MongodbTest::Application.routes.draw do
+  
+  resources :users
+  
+  resources :comments do
+    member do
+      post :upvote
+    end
+  end
 
-  map.root :controller => 'stories', :action => 'index'
+  resources :stories do
+    member do
+      post :upvote
+    end
+  end
 
-  map.signin '/signin', :controller => 'sessions', :action => 'new'
+  resource  :session
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  root :to => "stories#index"
+  
+  match 'signin' => 'sessions#new', :as => :signin
+
+
 end

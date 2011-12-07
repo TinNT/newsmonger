@@ -1,0 +1,3 @@
+== Newsmonger (rails3)
+=== A simple social news app demonstrating MongoDB with Rails and MongoMapper.
+
